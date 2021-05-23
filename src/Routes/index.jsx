@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 
 const Routes = () =>{
     const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [userId, setUserId] = useState("")
 
     const [techs, setTechs] = useState([])
 
@@ -34,6 +35,7 @@ const Routes = () =>{
                     isAuthenticated = {isAuthenticated}
                     setIsAuthenticated={setIsAuthenticated}
                     setTechs={setTechs}
+                    setUserId = {setUserId}
                 />
             </Route>
             <Route path = "/dashboard">
@@ -41,6 +43,7 @@ const Routes = () =>{
                     isAuthenticated = {isAuthenticated}
                     techs={techs}
                     setTechs={setTechs}
+                    userId={userId}
                 />
             </Route>
         </Switch>

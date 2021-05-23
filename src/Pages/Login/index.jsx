@@ -10,11 +10,12 @@ import {yupResolver} from "@hookform/resolvers/yup";
 import api from "../../Services/api";
 import {toast} from "react-toastify";
 
-const Login = ({isAuthenticated, setIsAuthenticated, setTechs}) => {
+const Login = ({isAuthenticated, setIsAuthenticated, setTechs, setUserId}) => {
     const schema = yup.object().shape({
         email: yup.string().email("E-mail inválido!!").required("Campo Obrigatório!!"),
         password: yup.string().min(8, "Mínimo 8 dígitos!!").required("Campo Obrigatório!!"),
     })
+
 
     const {register, handleSubmit, formState: {errors}
     } = useForm( {resolver:yupResolver(schema)})
@@ -22,13 +23,13 @@ const Login = ({isAuthenticated, setIsAuthenticated, setTechs}) => {
     const history = useHistory()
 
     const onSubmitFunction = (data) =>{
-        console.log(data)
         api.post("/sessions", data)
             .then( response => {
-                const {token, user: {techs}} = response.data;
+                const {token, user: {techs, id}} = response.data;
                 localStorage.setItem("@Kenziehub:token", JSON.stringify(token));
                 localStorage.setItem("@Kenziehub:user", JSON.stringify(techs));
-
+                localStorage.setItem("@Kenziehub:user", JSON.stringify(id));
+                setUserId(id)
                 setTechs(techs)
                 setIsAuthenticated(true);
                 return history.push("/dashboard")
