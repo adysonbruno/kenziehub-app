@@ -62,7 +62,7 @@ export const AnimationContainer = styled.div`
 
     a{
       font-weight: bold;
-      color: var(--orange);
+      color: var(--vanilla);
     }
   }
 `

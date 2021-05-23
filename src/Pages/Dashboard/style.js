@@ -27,7 +27,7 @@ export const InputContainer = styled.form`
   }
 `
 
-export const TaskContainer = styled.div`
+export const TechsContainer = styled.div`
   padding:0 38px;
   margin-top: 32px;
   display: flex;

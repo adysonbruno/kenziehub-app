@@ -16,11 +16,13 @@ export default createGlobalStyle`
       --orange: #c85311;
       --gray: #666360;
       --red: #c53030;
+      --primaryBlue: #394b58;
+      --secundaryBlue: #0f356b;
     }
     
     body{
-      background-color: var(--vanilla);
-      color: var(--black);
+      background-color: var(--primaryBlue);
+      color: var(--white);
     }
     
     body, input, button{

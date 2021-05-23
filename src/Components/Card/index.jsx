@@ -1,19 +1,18 @@
 import React from 'react';
 import {Container} from "./style"
-import {FiClipboard, FiCalendar} from "react-icons/fi";
 import Button from "../Button";
 
-const Card = ({title, date, onClick}) => {
+const Card = ({title, status, onClick}) => {
     return (
         <Container>
             <span>
-                <FiClipboard/> {title}
+              {title}
             </span>
             <hr/>
-            <time>
-                <FiCalendar/> {date}
-            </time>
-            <Button onClick={onClick}>Concluir</Button>
+            <p>
+               {status}
+            </p>
+            <Button onClick={onClick}>Apagar</Button>
         </Container>
     );
 };

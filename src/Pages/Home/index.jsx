@@ -17,8 +17,7 @@ const Home = ({isAuthenticated}) => {
     return (
         <Container>
             <Content>
-                <h1>do <span>.</span> it</h1>
-                <span>Organize-se de maneira fácil e efetiva</span>
+                <h1>Kenzie<span>Hub</span></h1>
                 <div>
                     <Button onClick = {() => handleNavigation("/signup")}  whiteSchema>Cadastre-se</Button>
                     <Button onClick = {() => handleNavigation("/login")}  >Login</Button>

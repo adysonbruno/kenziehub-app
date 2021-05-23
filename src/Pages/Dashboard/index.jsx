@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Redirect} from "react-router-dom";
-import {Container, InputContainer, TaskContainer} from "./style"
+import {Container, InputContainer, TechsContainer} from "./style"
 import Input from "../../Components/Input"
 import {useForm} from "react-hook-form";
 import {FiEdit2} from "react-icons/all";
@@ -9,7 +9,7 @@ import Card from "../../Components/Card";
 import api from "../../Services/api";
 import {toast} from "react-toastify";
 
-const Dashboard = ({isAuthenticated, techs, setTechs, userId}) => {
+const Dashboard = ({isAuthenticated, techs, setTechs, userId, setIsAuthenticated}) => {
 
     const [token] = useState(
         JSON.parse(localStorage.getItem("@Kenziehub:token")) || ""
@@ -17,7 +17,7 @@ const Dashboard = ({isAuthenticated, techs, setTechs, userId}) => {
 
     const {register, handleSubmit} = useForm();
 
-    const onSubmit = ({title, status}, data) => {
+    const handleAddTech = ({title, status}, data) => {
         const techs = {title, status}
         if (!title && !status) {
             return toast.error("Complete o campo para enviar uma tarefa!")
@@ -28,31 +28,30 @@ const Dashboard = ({isAuthenticated, techs, setTechs, userId}) => {
                     Authorization: `Bearer ${token}`,
                 }
             })
-
-        // api.get(`/users/${userId}`, data, {
-        //     headers: {
-        //         Authorization: `Bearer ${token}`,
-        //     }
-        //
-        // }).then(response => setTechs(response.data.techs))
     }
 
-
-
-    const handleDelete = (id, data) => {
+    const handleDelete = (id) => {
         api.delete(`/users/techs/${id}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
         })
-
-        // api.get(`/users/${userId}`, data, {
-        //     headers: {
-        //         Authorization: `Bearer ${token}`,
-        //     }
-        //
-        // }).then(response => setTechs(response.data.techs))
     }
+
+    const handleLogout = () =>{
+        localStorage.clear();
+        setIsAuthenticated(false);
+    }
+
+
+    useEffect((data) => {
+        api.get(`/users/${userId}`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        }).then(response => setTechs(response.data.techs))
+    }, [])
+
 
     useEffect((data) => {
         api.get(`/users/${userId}`, data, {
@@ -61,7 +60,7 @@ const Dashboard = ({isAuthenticated, techs, setTechs, userId}) => {
             }
 
         }).then(response => setTechs(response.data.techs))
-    }, [onSubmit, handleDelete])
+    }, [handleAddTech, handleDelete])
 
     if (!isAuthenticated) {
         return <Redirect to={"/login"}/>
@@ -69,37 +68,35 @@ const Dashboard = ({isAuthenticated, techs, setTechs, userId}) => {
 
     return (
         <Container>
-            <InputContainer onSubmit={handleSubmit(onSubmit)}>
-                <time>
-                    23 de maio de 2021
-                </time>
+            <Button type={"submit"}  onClick={() => handleLogout()}> Logout </Button>
+            <InputContainer onSubmit={handleSubmit(handleAddTech)}>
                 <section>
                     <Input
                         icon={FiEdit2}
-                        placehold={"Digite o nome da Tecnologia"}
+                        placeholder={"Digite o nome da Tecnologia"}
                         register={register}
                         name={"title"}
                     />
 
                     <Input
                         icon={FiEdit2}
-                        placehold={"Digite seu nível nessa tecnologia"}
+                        placeholder={"Digite seu nível nessa tecnologia"}
                         register={register}
                         name={"status"}
                     />
                     <Button type={"submit"}> Adicionar </Button>
                 </section>
             </InputContainer>
-            <TaskContainer>
+            <TechsContainer>
                 {
                     (techs)?
                     techs.map(tech =>
-                        <Card key={tech.id} title={tech.title} date={tech.status}
+                        <Card key={tech.id} title={tech.title} status={tech.status}
                               onClick={() => {
                                   handleDelete(tech.id)
                               }}/>
                     ):""}
-            </TaskContainer>
+            </TechsContainer>
         </Container>
     );
 };

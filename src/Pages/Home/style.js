@@ -13,9 +13,10 @@ export const Content = styled.div`
   max-width: 400px;
   h1{
     text-shadow: 0 4px 4px rgba(0,0,0,0.25);
-    font-size: 2.5rem;
+    font-size: 5rem;
     span{
-      color: #c85311;
+      color: #206ddc; font-size: 5rem;
+
     }
   }
 

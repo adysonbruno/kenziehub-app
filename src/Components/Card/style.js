@@ -21,8 +21,12 @@ export const Container = styled.div`
   }
   
   button{
-    margin-top: 80px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
     align-self: flex-end;
+    padding: 20px 0;
   }
   
   svg{
@@ -30,5 +34,13 @@ export const Container = styled.div`
     color: var(--orange);
     margin-right: 4px;
     transform: translateY(3px); 
+  }
+
+  span{
+    font-size: 2.5rem;
+  }
+
+  p{
+    font-size: 2rem;
   }
 `

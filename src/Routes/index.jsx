@@ -44,6 +44,7 @@ const Routes = () =>{
                     techs={techs}
                     setTechs={setTechs}
                     userId={userId}
+                    setIsAuthenticated={setIsAuthenticated}
                 />
             </Route>
         </Switch>
