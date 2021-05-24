@@ -6,7 +6,7 @@ const Card = ({title, status, onClick}) => {
     return (
         <Container>
             <span>
-              {title}
+              {title.length>8?title.slice(0,8)+"...":title}
             </span>
             <hr/>
             <p>

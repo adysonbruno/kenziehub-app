@@ -65,4 +65,26 @@ export const AnimationContainer = styled.div`
       color: var(--vanilla);
     }
   }
+
+
+`
+
+export const ContainerSelect = styled.div`
+
+  margin:16px 0; 
+
+  text-align: left;
+
+  select{
+  background: var(--white);
+  border-radius: 10px;
+  border: 2px solid var(--gray);
+  color: var(--gray);
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  margin-top:16px;
+  font-size: 1.1rem;
+  }
+
 `

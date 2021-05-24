@@ -1,5 +1,5 @@
 import React from 'react';
-import {AnimationContainer, Background, Container, Content} from "./style";
+import {AnimationContainer, Background, Container, Content, ContainerSelect} from "./style";
 import Button from "../../Components/Button";
 import {Link, Redirect, useHistory} from "react-router-dom";
 import Input from "../../Components/Input";
@@ -29,6 +29,7 @@ const Signup = ({isAuthenticated}) => {
 
     const onSubmitFunction = ({email, password, name, bio, contact, course_module}) =>{
         const user = {email, password, name, bio, contact, course_module}
+        console.log(user)
         api.post("/users", user)
             .then( _ => {
                 toast.success("Sucesso ao criar a conta")
@@ -76,20 +77,28 @@ const Signup = ({isAuthenticated}) => {
                             error = {errors.contact?.message}
                         />
 
-                    {/* <select {...register("gender")}>
-                            <option value="female">female</option>
-                            <option value="male">male</option>
-                            <option value="other">other</option>
-                        </select> */}
+                         <ContainerSelect>
+                            <label htmlFor="course_module"> <span>Em qual módulo do curso você está?</span></label>   
+                            <select 
+                                {...register("course_module")}  
+                                name={"course_module"}>
+                                <option value="Primeiro módulo (Introdução ao Frontend)">Primeiro módulo </option>
+                                <option value="Segundo módulo (Frontend Avançado)">Segundo módulo</option>
+                                <option value="Terceiro módulo (Introdução ao Backend)">Terceiro módulo</option>
+                                <option value="Quarto módulo (Backend Avançado)">Quarto móduloo</option>
+                            </select>     
+                        </ContainerSelect>   
+                        
+      
 
-                        <Input
+                        {/* <Input
                             register={register}
                             name={"course_module"}
                             label={"Módulo do Curso"}
                             icon={FiUser} //mudar
                             placeholder={"Em qual módulo do curso você está?"}
                             error = {errors.course_module?.message}
-                        />
+                        /> */}
 
                         <Input
                             register={register}

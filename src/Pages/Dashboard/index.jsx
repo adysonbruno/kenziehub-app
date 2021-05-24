@@ -19,15 +19,27 @@ const Dashboard = ({isAuthenticated, techs, setTechs, userId, setIsAuthenticated
 
     const handleAddTech = ({title, status}) => {
         const techs = {title, status}
-        if (!title && !status) {
-            return toast.error("Complete o campo para enviar uma tarefa!")
+        if (!title) {
+            return toast.error("Complete o campo de título para cadastrar uma tecnologia!!", { position: "bottom-right"})
+        }else if(!status){
+            return toast.error("Complete o campo de status para cadastrar uma tecnologia!!", { position: "bottom-right"})
         }
+
         api.post("/users/techs/", techs,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
-            })
+            }).then(_ => toast.success("Tecnologia Cadastrada com Sucesso!!", {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                }))
+            .catch(r => toast.error("Por favor, verifique se essa tecnologia já foi cadastrada!", { position: "bottom-right"}))
             
     }
 
