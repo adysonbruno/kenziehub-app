@@ -7,10 +7,10 @@ import {useEffect, useState} from "react";
 
 const Routes = () =>{
     const [isAuthenticated, setIsAuthenticated] = useState(false)
-    const [userId, setUserId] = useState("")
+    const [userId, setUserId] = useState(localStorage.getItem("@Kenziehub:user")? JSON.parse(localStorage.getItem("@Kenziehub:user")):"")
 
     const [techs, setTechs] = useState([])
-
+   
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem("@Kenziehub:token"))
         if(token){

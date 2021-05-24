@@ -76,6 +76,12 @@ const Signup = ({isAuthenticated}) => {
                             error = {errors.contact?.message}
                         />
 
+                    {/* <select {...register("gender")}>
+                            <option value="female">female</option>
+                            <option value="male">male</option>
+                            <option value="other">other</option>
+                        </select> */}
+
                         <Input
                             register={register}
                             name={"course_module"}

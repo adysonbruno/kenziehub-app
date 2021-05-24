@@ -16,7 +16,6 @@ const Login = ({isAuthenticated, setIsAuthenticated, setTechs, setUserId}) => {
         password: yup.string().min(8, "Mínimo 8 dígitos!!").required("Campo Obrigatório!!"),
     })
 
-
     const {register, handleSubmit, formState: {errors}
     } = useForm( {resolver:yupResolver(schema)})
 
@@ -27,7 +26,6 @@ const Login = ({isAuthenticated, setIsAuthenticated, setTechs, setUserId}) => {
             .then( response => {
                 const {token, user: {techs, id}} = response.data;
                 localStorage.setItem("@Kenziehub:token", JSON.stringify(token));
-                localStorage.setItem("@Kenziehub:user", JSON.stringify(techs));
                 localStorage.setItem("@Kenziehub:user", JSON.stringify(id));
                 setUserId(id)
                 setTechs(techs)

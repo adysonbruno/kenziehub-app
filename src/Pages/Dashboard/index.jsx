@@ -17,7 +17,7 @@ const Dashboard = ({isAuthenticated, techs, setTechs, userId, setIsAuthenticated
 
     const {register, handleSubmit} = useForm();
 
-    const handleAddTech = ({title, status}, data) => {
+    const handleAddTech = ({title, status}) => {
         const techs = {title, status}
         if (!title && !status) {
             return toast.error("Complete o campo para enviar uma tarefa!")
@@ -28,6 +28,7 @@ const Dashboard = ({isAuthenticated, techs, setTechs, userId, setIsAuthenticated
                     Authorization: `Bearer ${token}`,
                 }
             })
+            
     }
 
     const handleDelete = (id) => {
@@ -43,13 +44,15 @@ const Dashboard = ({isAuthenticated, techs, setTechs, userId, setIsAuthenticated
         setIsAuthenticated(false);
     }
 
-
     useEffect((data) => {
         api.get(`/users/${userId}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
             }
-        }).then(response => setTechs(response.data.techs))
+        }).then(response => {
+            setTechs(response.data.techs);
+            localStorage.setItem("@Kenziehub:techs", JSON.stringify(response.data.techs))   
+        })
     }, [])
 
 
